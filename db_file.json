@@ -1,0 +1,15 @@
+{
+    "ciudades":[
+        {
+            "id":1,
+            "ciudad":"",
+            "aeropuerto":"",
+            "latitud":0,
+            "longitud":0,
+            "tiempo":1
+        },
+        {
+
+        }
+    ] 
+}
