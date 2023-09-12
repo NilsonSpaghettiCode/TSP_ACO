@@ -7,4 +7,11 @@ let settings =
     atribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }
 
-export {settings}
+let settings_aco = 
+{
+    initial_feromone: 0.1,
+    evaporation: 1,
+    
+}
+
+export {settings, settings_aco}

@@ -81,7 +81,12 @@
         "nombre": "La Plata",
         "latitud": -34.9202,
         "longitud": -57.9538,
-        "aeropuerto": "No cuenta con un aeropuerto internacional; el Aeropuerto Internacional Ministro Pistarini en Buenos Aires (EZE) es el más cercano."
+        "aeropuerto": {
+          "nombre":"Aeropuerto Internacional Presidente Perón",
+          "latitud": -38.9526,
+          "longitud": -68.1336,
+          "codigo_iata":"NQN"
+        }
       },
       {
         "nombre": "Bariloche",

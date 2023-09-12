@@ -2,17 +2,21 @@
  * Function Main
  */
 //import {settings} from "./utils/settings.js";
-import { loadDataCities} from "./DataController.js";
+import { loadDataCities, mapCitiesGraph} from "./DataController.js";
 import {Nodo, Graph, Arista} from "./Graph.js";
 
-import {Coordinate} from "./utils/basic.js";
 
-let data;
+
+let data = {};
 async function main(params) {
     console.log("Funcionando!")
     data = await loadDataCities("./data/db_file.json")
-    
-    let nodoA = new Nodo("EZE", new Coordinate(-34.8128, -58.5422))
+
+    let grafo = new Graph()
+    grafo = mapCitiesGraph(data.ciudades)
+    grafo.verGrafo()
+    /**
+     * let nodoA = new Nodo("EZE", new Coordinate(-34.8128, -58.5422))
     let nodoB = new Nodo("COR", new Coordinate(-31.3152, -64.2080))
     let nodoC = new Nodo("C", new Coordinate(-32.905, -60.7859))
 
@@ -27,8 +31,11 @@ async function main(params) {
 
     grafo.agregarArista(aristaAB)
     grafo.agregarArista(aristaAC)
-
     console.log(grafo.getNodos())
+     * 
+     */
+
+    
 
 }
 

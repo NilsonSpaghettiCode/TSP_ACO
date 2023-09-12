@@ -1,7 +1,10 @@
 import {geomath} from "./utils/geomath.js";
+import {randomHour} from "./utils/functions.js";
+import {  settings_aco } from "./utils/settings.js";
+
 class Nodo
 {
-    constructor(nombre, coordenada)
+    constructor(nombre, coordenada) //FALTA AGREGAR VARIABLE DE TIEMPO
     {
         this.nombre = nombre
         this.coordenada = coordenada
@@ -19,12 +22,13 @@ class Arista
      * @param {*} peso 
      * @param {*} feromona 
      */
-    constructor(nodo_inicio, nodo_fin, feromona)
+    constructor(nodo_inicio, nodo_fin, feromona=settings_aco.initial_feromone) //FALTA SUMAR VARIABLE DE TIEMPO A PESO
     {
         this.nodo_inicio = nodo_inicio
         this.nodo_fin = nodo_fin
+        this.tiempo = randomHour(3600, 7200)
 
-        this.peso = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada())
+        this.peso = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) + this.tiempo
         this.feromona = feromona
     }
 
@@ -34,8 +38,10 @@ class Arista
     setFeromona(feromona) { this.feromona = feromona}
     getFeromona()         { return this.feromona}
     
+
     getInicio(){ return this.nodo_inicio }
     getFin   (){ return this.nodo_fin    }
+    getTiempo(){ return this.tiempo      }
     getPeso  (){ return this.peso        }
     
  
@@ -58,7 +64,7 @@ class Graph
     agregarArista(arista)
     {
         this.nodos[arista.getInicio().getNombre()].push(arista)
-        this.nodos[arista.getFin().getNombre()].push(arista.getInverso())
+        //this.nodos[arista.getFin().getNombre()].push(arista.getInverso())
     }
 
     nodoEnGrafo(nombre_nodo){
@@ -76,6 +82,11 @@ class Graph
         return vecinos
     }
     getNodos(){ return this.nodos}
+
+    verGrafo()
+    {
+        console.log(this.nodos)
+    }
 }
 
 
