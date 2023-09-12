@@ -1,4 +1,27 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+.container
+{
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title
+{
+    font-weight: bold;
+    margin: 10px;
+}
 .map
 {
-
+    width: 1720px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.421);
+    margin: 10px;
 }

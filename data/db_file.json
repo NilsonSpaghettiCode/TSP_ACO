@@ -1,0 +1,110 @@
+{
+    "ciudades": [
+      {
+        "nombre": "Buenos Aires",
+        "latitud": -34.6118,
+        "longitud": -58.4173,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Ministro Pistarini (Aeropuerto de Ezeiza)",
+          "latitud": -34.8128,
+          "longitud": -58.5422,
+          "codigo_iata": "EZE"
+        }
+      },
+      {
+        "nombre": "Córdoba",
+        "latitud": -31.4201,
+        "longitud": -64.1888,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Ingeniero Ambrosio Taravella",
+          "latitud": -31.3152,
+          "longitud": -64.2080,
+          "codigo_iata": "COR"
+        }
+      },
+      {
+        "nombre": "Rosario",
+        "latitud": -32.9515,
+        "longitud": -60.6643,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Rosario \"Islas Malvinas\"",
+          "latitud": -32.9051,
+          "longitud": -60.7859,
+          "codigo_iata": "ROS"
+        }
+      },
+      {
+        "nombre": "Mendoza",
+        "latitud": -32.8895,
+        "longitud": -68.8458,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Governor Francisco Gabrielli (Aeropuerto El Plumerillo)",
+          "latitud": -32.8268,
+          "longitud": -68.7941,
+          "codigo_iata": "MDZ"
+        }
+      },
+      {
+        "nombre": "Mar del Plata",
+        "latitud": -38.0049,
+        "longitud": -57.5494,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Astor Piazzolla",
+          "latitud": -37.9342,
+          "longitud": -57.5731,
+          "codigo_iata": "MDQ"
+        }
+      },
+      {
+        "nombre": "Salta",
+        "latitud": -24.7829,
+        "longitud": -65.4122,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Martín Miguel de Güemes",
+          "latitud": -24.8419,
+          "longitud": -65.4799,
+          "codigo_iata": "SLA"
+        }
+      },
+      {
+        "nombre": "San Juan",
+        "latitud": -31.5375,
+        "longitud": -68.5364,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Domingo Faustino Sarmiento",
+          "latitud": -31.5714,
+          "longitud": -68.4195,
+          "codigo_iata": "UAQ"
+        }
+      },
+      {
+        "nombre": "La Plata",
+        "latitud": -34.9202,
+        "longitud": -57.9538,
+        "aeropuerto": "No cuenta con un aeropuerto internacional; el Aeropuerto Internacional Ministro Pistarini en Buenos Aires (EZE) es el más cercano."
+      },
+      {
+        "nombre": "Bariloche",
+        "latitud": -41.1335,
+        "longitud": -71.3102,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Teniente Luis Candelaria",
+          "latitud": -41.1512,
+          "longitud": -71.1579,
+          "codigo_iata": "BRC"
+        }
+      },
+      {
+        "nombre": "Tucumán",
+        "latitud": -26.8320,
+        "longitud": -65.2226,
+        "aeropuerto": {
+          "nombre": "Aeropuerto Internacional Teniente Benjamín Matienzo",
+          "latitud": -26.8407,
+          "longitud": -65.1042,
+          "codigo_iata": "TUC"
+        }
+      }
+    ]
+  }
+  
