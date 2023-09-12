@@ -13,4 +13,8 @@ async function loadDataCities(request_address) {
   return data;
 }
 
+function mapCitiesGraph(params) {
+  
+}
+
 export { loadDataCities };

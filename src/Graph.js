@@ -1,15 +1,13 @@
+import {geomath} from "./utils/geomath.js";
 class Nodo
 {
-    constructor(nombre, latitud, longitud)
+    constructor(nombre, coordenada)
     {
         this.nombre = nombre
-        this.latitud = latitud
-        this.longitud = longitud
+        this.coordenada = coordenada
     }
-    getLongitud() { return this.longitud }
-    getLatitud () { return this.latitud  }
-    getNombre  () { return this.nombre   }
-    
+    getCoordenada() { return this.coordenada }
+    getNombre    () { return this.nombre     }
 }
 
 class Arista
@@ -21,17 +19,17 @@ class Arista
      * @param {*} peso 
      * @param {*} feromona 
      */
-    constructor(nodo_inicio, nodo_fin, peso, feromona)
+    constructor(nodo_inicio, nodo_fin, feromona)
     {
         this.nodo_inicio = nodo_inicio
         this.nodo_fin = nodo_fin
 
-        this.peso = peso
+        this.peso = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada())
         this.feromona = feromona
     }
 
     
-    getInverso ()         { return new Arista(this.nodo_fin, this.nodo_inicio, this.peso, this.feromona)}
+    getInverso ()         { return new Arista(this.nodo_fin, this.nodo_inicio, this.feromona)}
     
     setFeromona(feromona) { this.feromona = feromona}
     getFeromona()         { return this.feromona}
