@@ -4,15 +4,18 @@ class Ant {
     this.path = [];
     this.nodo = start;
     this.addNode(this.nodo)
+    //this.energy_total = 10; Variable inventada, estaria chevere ver como usarla
+    this.cost = 0;
   }
 
   addNode(name_node) {
     this.path.push(name_node);
   }
 
-  move(nodo) {
-    this.nodo = nodo;
-    this.addNode(nodo);
+  move(arista) {
+    this.nodo = arista.nodo_fin.getNombre();
+    this.cost += arista.peso
+    this.addNode(this.nodo);
   }
   length() {
     return this.path.length;
@@ -25,6 +28,8 @@ class Ant {
   getPath() {
     return this.path;
   }
+
+  getCost() {return this.cost}
 }
 
 class ACO {
@@ -37,15 +42,21 @@ class ACO {
     let start = "EZE";
     let test = new Ant(start);
 
-    let nextNodo = this.getNextNodo(test);
-    test.move(nextNodo);
+    while (test.getPath().length != 10) {
+      let nextArista = this.getNextArista(test);
+      test.move(nextArista);
+    }
+
+    console.log("Camino: "+test.getPath()+ ", Costo:"+test.getCost())
 
     return this.best_way;
   }
 
-  getNextNodo(ant_i) {
+  best_way(ants){}
+
+  getNextArista(ant_i) {
     let nodo = "";
-    let nodo_siguiente = "";
+    let arista_siguiente = {};
     let path_ant = [];
     let neighbors = [];
 
@@ -86,8 +97,8 @@ class ACO {
         let ls = value
         //console.log("[",li,",",ls,"]")
         if (selection >= li && selection <= ls) {
-            nodo_siguiente = arista.nodo_fin.getNombre()
-            return nodo_siguiente
+            arista_siguiente = arista
+            return arista_siguiente
         }
     }
 

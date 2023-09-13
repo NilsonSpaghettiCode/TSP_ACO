@@ -95,7 +95,7 @@ class Graph
         return vecinos
     }
     getNodos(){ return this.nodos}
-
+    getCantidadNodos() {}
     verGrafo()
     {
         console.log(this.nodos)

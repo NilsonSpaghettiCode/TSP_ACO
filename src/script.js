@@ -19,8 +19,6 @@ async function main(params) {
     let algoritm_aco = new ACO(grafo)
     algoritm_aco.aprox()
 
-    
-
 }
 
 main()
