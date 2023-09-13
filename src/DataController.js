@@ -47,4 +47,6 @@ function mapCitiesGraph(cities) {
   return graph;
 }
 
+
+
 export { loadDataCities, mapCitiesGraph };

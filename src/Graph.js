@@ -18,8 +18,7 @@ class Arista
     /**
      * 
      * @param {*} nodo_inicio Objeto del tipo Nodo
-     * @param {*} nodo_fin Objeto del tipo Nodo
-     * @param {*} peso 
+     * @param {*} nodo_fin Objeto del tipo Nodo 
      * @param {*} feromona 
      */
     constructor(nodo_inicio, nodo_fin, feromona=settings_aco.initial_feromone) //FALTA SUMAR VARIABLE DE TIEMPO A PESO
@@ -28,7 +27,7 @@ class Arista
         this.nodo_fin = nodo_fin
         
         this.tiempo = randomHour(3600, 7200)
-        this.peso = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) + this.tiempo
+        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) / this.tiempo) // Da lugar a una velocidad V=D/T
         
         this.visibilidad = 1/ this.peso
         this.feromona = feromona

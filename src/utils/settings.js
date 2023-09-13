@@ -14,7 +14,7 @@ let settings_aco =
     alpha:1,
     beta:3,
     max_iterations:200,
-    max_anc:200
+    amount_ants:100
     
 }
 
