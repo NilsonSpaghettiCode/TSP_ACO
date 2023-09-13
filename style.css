@@ -1,27 +1,37 @@
-*
-{
-    margin: 0px;
-    padding: 0px;
-    font-family: sans-serif;
+:root {
+  ---green: #03460d;
 }
 
-.container
-{
-    display: flex;
-    position: relative;
-    align-items: center;
-    flex-direction: column;
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
 }
 
-.title
-{
-    font-weight: bold;
-    margin: 10px;
+.container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
 }
-.map
-{
-    width: 1720px;
-    height: 600px;
-    background-color: rgba(0, 0, 0, 0.421);
-    margin: 10px;
+
+.title {
+  font-weight: bold;
+  margin: 10px;
+}
+.map {
+  width: 1720px;
+  height: 600px;
+  max-width: 50%;
+  max-height: 50%;
+  background-color: var(---green);
+  margin: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .map {
+    max-width: 50%;
+    max-height: 50%;
+    background-image: url(assets/img/download.jpg);
+  }
 }
