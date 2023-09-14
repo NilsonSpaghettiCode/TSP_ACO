@@ -25,7 +25,7 @@ function mapCitiesGraph(cities) {
     let aeropuerto = city.aeropuerto;
     let nodo = new Nodo(
       aeropuerto.codigo_iata,
-      new Coordinate(aeropuerto.latitud, aeropuerto.longitud)
+      new Coordinate(aeropuerto.latitud, aeropuerto.longitud), aeropuerto.nombre, city.nombre
     );
     nodos.push(nodo);
     graph.agregarNodo(nodo);

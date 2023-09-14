@@ -1,10 +1,13 @@
-let settings =
+let settings_map =
 {
     idMap: "map",
-    zoom: 7,
+    max_zoom: 19,
+    zoom: 12,
     urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    center: [1,1],
-    atribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    atribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    initial_lat: -34.601243562899434,
+    initial_lon: -58.39622247071027,
+    radius_circle: 70000,
 }
 
 let settings_aco = 
@@ -14,7 +17,6 @@ let settings_aco =
     learning: 1,
     max_iterations:200,
     amount_ants:153
-    
 }
 
-export {settings, settings_aco}
+export {settings_map, settings_aco}

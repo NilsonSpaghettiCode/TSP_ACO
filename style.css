@@ -1,5 +1,5 @@
 :root {
-  ---green: #03460d;
+  ---green: #02030282;
 }
 
 * {
@@ -22,11 +22,25 @@
 .map {
   width: 1720px;
   height: 600px;
-  max-width: 50%;
+  max-width: 75%;
   max-height: 50%;
   background-color: var(---green);
   margin: 10px;
 }
+.result
+{
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn
+{
+  width: 130px;
+  height: 25px;
+}
+
 
 @media only screen and (max-width: 600px) {
   .map {

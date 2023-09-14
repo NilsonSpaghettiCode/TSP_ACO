@@ -4,13 +4,18 @@ import {  settings_aco } from "./utils/settings.js";
 
 class Nodo
 {
-    constructor(nombre, coordenada) //FALTA AGREGAR VARIABLE DE TIEMPO
+    constructor(nombre, coordenada, nombre_aeropuerto, nombre_ciudad)
     {
         this.nombre = nombre
         this.coordenada = coordenada
+        this.nombre_aeropuerto = nombre_aeropuerto
+        this.nombre_ciudad = nombre_ciudad
     }
-    getCoordenada() { return this.coordenada }
-    getNombre    () { return this.nombre     }
+    getCoordenada() { return this.coordenada        }
+    getNombre    () { return this.nombre            }
+    
+    getNombreAeropuerto() { return this.nombre_aeropuerto }
+    getNombreCiudad    () { return this.nombre_ciudad     }
 }
 
 class Arista
@@ -98,11 +103,13 @@ class Graph
         this.nodos = {}
         this.aristas = {}
         this.nombres_aristas = []
+        this.nodos_obj = []
     }
 
     agregarNodo(nodo)
     {
         this.nodos[nodo.getNombre()] = []
+        this.nodos_obj.push(nodo)
     }
 
     agregarArista(arista)
@@ -128,7 +135,8 @@ class Graph
         return vecinos
     }
     getAristas() { return this.aristas}
-    getNodos  ()   { return this.nodos}
+    getNodos  () { return this.nodos}
+    getNodosObj () { return this.nodos_obj}
     getNombresAristas() {return this.nombres_aristas}
     verGrafo()
     {
