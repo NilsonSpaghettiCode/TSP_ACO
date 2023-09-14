@@ -14,11 +14,11 @@ async function main(params) {
 
     let grafo = new Graph()
     grafo = mapCitiesGraph(data.ciudades)
-    grafo.verGrafo()
+    //grafo.verGrafo()
 
     let algoritm_aco = new ACO(grafo)
-    algoritm_aco.aprox()
-
+    let best_way = algoritm_aco.aprox()
+    console.log(best_way)
     //console.log(grafo.getAristas())
 
 }

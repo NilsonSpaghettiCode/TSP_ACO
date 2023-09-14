@@ -1,4 +1,6 @@
 import { settings_aco } from "./utils/settings.js";
+
+
 class Ant {
   constructor(start) {
     this.path = [];
@@ -6,7 +8,16 @@ class Ant {
     this.aristas = []
     this.addNode(this.nodo);
     //this.energy_total = 10; Variable inventada, estaria chevere ver como usarla
-    this.cost = 0;
+    if (start == "NONE") {
+      this.cost = Infinity;
+    } else
+    {
+      this.cost = 0;
+    }
+  }
+  valueOf()
+  {
+    return this.cost
   }
 
   addNode(name_node) {
@@ -20,12 +31,17 @@ class Ant {
 
   move(arista) {
     this.nodo = arista.nodo_fin.getNombre();
-    let nombre_arista = arista.getNombre()
 
     this.cost += arista.peso;
     this.addNode(this.nodo);
-    this.addAristas(nombre_arista)
+    this.addAristas(arista)
   }
+
+  pheromonalContribution()
+  {
+    return (settings_aco.learning/this.cost) //Revisar posibilidad de obtener 0
+  }
+
   length() {
     return this.path.length;
   }
@@ -50,12 +66,13 @@ class Ant {
 
 class ACO {
   constructor(graph) {
-    this.best_way = [];
+    this.best_way = new Ant("NONE");
     this.graph = graph;
     this.iteration = 0;
     this.beginnings = [];
     this.ant_per_node = 0;
     this.names_nodes = Object.keys(this.graph.getNodos());
+    
   }
 
   /**
@@ -63,30 +80,47 @@ class ACO {
    */
   aprox() {
 
-    //console.log("DATA: ",this.beginnings)
+    
+
     this.generateBegings();
     let ants = this.buildAnts();
-    this.runAnts(ants)
-
-    let ant_best_way = this.bestWay(ants)
-
-    console.log(ant_best_way)
-
-    console.log(ants)
-
-    /**
-     * let start = "EZE";
-    let test = new Ant(start);
-    console.log(test)
-
+    let copy_ants_reset = _.cloneDeep(ants)
     
-     * 
-     */
+    for (let index = 0; index < settings_aco.max_iterations; index++) {
+      this.runAnts(ants)
+      let temporal_best_way = this.bestWay(ants)
+      if (this.best_way > temporal_best_way) {
+        this.best_way = _.cloneDeep(temporal_best_way)
+      }
+      this.updateFeromone(ants)
+      ants = _.cloneDeep(copy_ants_reset)
+      console.log("Iteration: ",index)
 
+    }
     return this.best_way;
   }
   updateFeromone(ants)
   {
+    
+    for (let index = 0; index < ants.length; index++) {
+
+      const ant_i = ants[index];
+      let aristas = ant_i.getAristas()
+      let aporte_feromonal_hormiga = ant_i.pheromonalContribution()
+
+      for (let index = 0; index < aristas.length; index++) {
+        const arista_i = aristas[index];
+        arista_i.agregarContribucionFeromona(aporte_feromonal_hormiga)  
+      }
+    }
+
+    let nombres_aristas = this.graph.getNombresAristas()
+    let aristas = this.graph.getAristas()
+    for (let index = 0; index < nombres_aristas.length; index++) {
+      const nombre_arista = nombres_aristas[index];
+      aristas[nombre_arista].updateFeromona()
+    }
+   
 
   }
   runAnts(ants)
@@ -103,47 +137,6 @@ class ACO {
       }
 
     }
-  }
-  getBegin() {
-    //Arreglar
-    let nombre_nodo = "";
-
-    for (const i in this.beginnings) {
-      if (this.beginnings[i].max_value != 0) {
-        nombre_nodo = this.beginnings[i].name;
-
-        this.beginnings[i].max_value -= 1;
-
-        return nombre_nodo;
-      }
-    }
-    nombre_nodo;
-  }
-
-  buildAnts(amount_ants = settings_aco.amount_ants) {
-    //Revisar
-    let ants = [];
-
-    for (let index = 0; index < amount_ants; index++) {
-      let nombre = this.getBegin();
-      let ant_i = new Ant(nombre);
-      ants.push(ant_i);
-    }
-    return ants;
-  }
-
-  bestWay(ants) {
-    let cost_actual = ants[0].getCost();
-    let best_way = ants[0].getPath();
-    let ant_best_way = {}
-    for (let index = 1; index < ants.length; index++) {
-      const ant_i = ants[index];
-      if (cost_actual > ant_i.getCost()) {
-        best_way = ant_i.getPath();
-        ant_best_way = ant_i
-      }
-    }
-    return ant_best_way;
   }
 
   getNextArista(ant_i) {
@@ -201,6 +194,31 @@ class ACO {
      */
   }
 
+  bestWay(ants) {
+    let cost_actual = ants[0].getCost();
+    let ant_best_way = {}
+    for (let index = 1; index < ants.length; index++) {
+      const ant_i = ants[index];
+      if (cost_actual > ant_i.getCost()) {
+        ant_best_way = ant_i
+        cost_actual = ant_i.getCost()
+      }
+    }
+    return ant_best_way;
+  }
+
+  buildAnts(amount_ants = settings_aco.amount_ants) {
+    //Revisar
+    let ants = [];
+
+    for (let index = 0; index < amount_ants; index++) {
+      let nombre = this.getBegin();
+      let ant_i = new Ant(nombre);
+      ants.push(ant_i);
+    }
+    return ants;
+  }
+
   generateBegings() {
     //Refactorizar llamados a variables incesarios
     let ants_asigned = 0;
@@ -241,15 +259,31 @@ class ACO {
     }
     
   }
+  getBegin() {
+    let nombre_nodo = "";
+
+    for (const i in this.beginnings) {
+      if (this.beginnings[i].max_value != 0) {
+        nombre_nodo = this.beginnings[i].name;
+
+        this.beginnings[i].max_value -= 1;
+
+        return nombre_nodo;
+      }
+    }
+    nombre_nodo;
+  }
+
+  /**
+   * Calculate the: amount of ants/nodes
+   */
   calculateAntPerNode(
     amount_ants = settings_aco.amount_ants,
     amount_nodes = this.names_nodes.length
   ) {
     return Math.round(amount_ants / amount_nodes);
   }
-  /**
-   * Calculate the: amount of ants/nodes
-   */
+  
 }
 
 export { ACO };

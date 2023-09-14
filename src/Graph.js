@@ -27,13 +27,16 @@ class Arista
         this.nodo_fin = nodo_fin
         
         this.tiempo = randomHour(3600, 7200)
-        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) ) // Da lugar a una velocidad V=D/T
+        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) / this.tiempo) // Da lugar a una velocidad V=D/T
         
         this.visibilidad = 1/ this.peso
         this.feromona = feromona
 
         this.visibilidad_feromona = 0
         this.Pxy = 0
+
+        this.evaporacion_feromona = 0 //No es la constante
+        this.total_aporte_feromonal = 0 //Cantidad de feromona a aumentar de acuerdo a la evaporacion y el aporte de las hormigas
     }
 
     
@@ -53,10 +56,36 @@ class Arista
 
     getInicio() { return this.nodo_inicio }
     getFin   () { return this.nodo_fin    }
+
     getTiempo() { return this.tiempo      }
     getPeso  () { return this.peso        }
+    
     getNombre() { return (this.nodo_inicio.getNombre()+"_"+this.nodo_fin.getNombre())}
     
+    resetContribucionTotal()
+    {
+        this.total_aporte_feromonal = 0
+    }
+    getContribucionTotal()
+    {
+        return this.total_aporte_feromonal;
+    }
+
+    agregarContribucionFeromona(nuevo_aporte_hormiga)
+    {
+        this.total_aporte_feromonal += nuevo_aporte_hormiga
+    }
+
+    getEvaporacionFeromona()
+    {
+        return ((1-settings_aco.evaporation) * this.feromona)
+    }
+
+    updateFeromona() {
+        let nueva_feromona = (this.getEvaporacionFeromona() + this.getContribucionTotal())
+        this.setFeromona(nueva_feromona)
+        this.resetContribucionTotal()
+    }
  
 }
 /**
@@ -68,6 +97,7 @@ class Graph
     {
         this.nodos = {}
         this.aristas = {}
+        this.nombres_aristas = []
     }
 
     agregarNodo(nodo)
@@ -79,6 +109,7 @@ class Graph
     {
         this.nodos[arista.getInicio().getNombre()].push(arista)
         this.aristas[arista.getNombre()] = arista
+        this.nombres_aristas.push(arista.getNombre())
         //this.nodos[arista.getFin().getNombre()].push(arista.getInverso())
     }
 
@@ -98,9 +129,7 @@ class Graph
     }
     getAristas() { return this.aristas}
     getNodos  ()   { return this.nodos}
-    
-
-    getCantidadNodos() {}
+    getNombresAristas() {return this.nombres_aristas}
     verGrafo()
     {
         console.log(this.nodos)
