@@ -10,11 +10,10 @@ let settings =
 let settings_aco = 
 {
     initial_feromone: 0.1,
-    evaporation: 1,
-    alpha:1,
-    beta:3,
+    evaporation: 0.01,
+    learning: 1,
     max_iterations:200,
-    amount_ants:100
+    amount_ants:153
     
 }
 

@@ -1,5 +1,5 @@
-import {geomath} from "./utils/geomath.js";
-import {randomHour} from "./utils/functions.js";
+import { geomath } from "./utils/geomath.js";
+import { randomHour } from "./utils/functions.js";
 import {  settings_aco } from "./utils/settings.js";
 
 class Nodo
@@ -27,7 +27,7 @@ class Arista
         this.nodo_fin = nodo_fin
         
         this.tiempo = randomHour(3600, 7200)
-        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) / this.tiempo) // Da lugar a una velocidad V=D/T
+        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) ) // Da lugar a una velocidad V=D/T
         
         this.visibilidad = 1/ this.peso
         this.feromona = feromona
@@ -51,10 +51,11 @@ class Arista
     setVisibilidad(visibilidad) { this.visibilidad = visibilidad }
     getVisibilidad() { return this.visibilidad }
 
-    getInicio(){ return this.nodo_inicio }
-    getFin   (){ return this.nodo_fin    }
-    getTiempo(){ return this.tiempo      }
-    getPeso  (){ return this.peso        }
+    getInicio() { return this.nodo_inicio }
+    getFin   () { return this.nodo_fin    }
+    getTiempo() { return this.tiempo      }
+    getPeso  () { return this.peso        }
+    getNombre() { return (this.nodo_inicio.getNombre()+"_"+this.nodo_fin.getNombre())}
     
  
 }
@@ -66,6 +67,7 @@ class Graph
     constructor()
     {
         this.nodos = {}
+        this.aristas = {}
     }
 
     agregarNodo(nodo)
@@ -76,6 +78,7 @@ class Graph
     agregarArista(arista)
     {
         this.nodos[arista.getInicio().getNombre()].push(arista)
+        this.aristas[arista.getNombre()] = arista
         //this.nodos[arista.getFin().getNombre()].push(arista.getInverso())
     }
 
@@ -85,7 +88,7 @@ class Graph
         }
         return false
     }
-
+    //Realmente se obtienen las aristas, solo que se usa el nodo_fin
     getNodosVecinos(nombre_nodo){
         let vecinos = undefined
         if (this.nodoEnGrafo(nombre_nodo)) {
@@ -93,7 +96,10 @@ class Graph
         }
         return vecinos
     }
-    getNodos(){ return this.nodos}
+    getAristas() { return this.aristas}
+    getNodos  ()   { return this.nodos}
+    
+
     getCantidadNodos() {}
     verGrafo()
     {
