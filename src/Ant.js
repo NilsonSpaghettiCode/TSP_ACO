@@ -1,5 +1,5 @@
 import { settings_aco } from "./utils/settings.js";
-
+import { IPublisher, DataIterationACO } from "./Interfaces/IObserver.js";
 
 class Ant {
   constructor(start) {
@@ -64,8 +64,9 @@ class Ant {
   }
 }
 
-class ACO {
+class ACO extends IPublisher{
   constructor(graph) {
+    super();
     this.best_way = new Ant("NONE");
     this.graph = graph;
     this.iteration = 0;
@@ -76,12 +77,25 @@ class ACO {
   }
 
   /**
+   * Methods inherited
+   */
+  addSuscriber(suscriber)
+  {
+    this.suscribers.push(suscriber)
+  }
+
+  notifySuscribers(data)
+  {
+    for (const index in this.suscribers) {
+      let suscriber = this.suscribers[index]
+      let data_notify = new DataIterationACO(this.best_way, data)
+      suscriber.update(data_notify)
+    }
+  }
+  /**
    * Create array with all nodes for beginning (ANTS)
    */
   aprox() {
-
-    
-
     this.generateBegings();
     let ants = this.buildAnts();
     let copy_ants_reset = _.cloneDeep(ants)
@@ -92,9 +106,10 @@ class ACO {
       if (this.best_way > temporal_best_way) {
         this.best_way = _.cloneDeep(temporal_best_way)
       }
+      this.notifySuscribers(index);
+
       this.updateFeromone(ants)
       ants = _.cloneDeep(copy_ants_reset)
-      console.log("Iteration: ",index)
 
     }
     return this.best_way;

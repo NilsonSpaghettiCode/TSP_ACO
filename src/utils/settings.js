@@ -16,7 +16,17 @@ let settings_aco =
     evaporation: 0.01,
     learning: 1,
     max_iterations:200,
-    amount_ants:153
+    amount_ants:153,
+    unidad: "K/M"
 }
 
-export {settings_map, settings_aco}
+let settings_dom = 
+{
+    id_iteraciones_max: "iteraciones_totales",
+    id_iteracion_i: "iteraciones_actuales",
+    btn_start: "Start",
+    btn_reset: "Reset",
+    id_costo:"costo"
+}
+
+export {settings_map, settings_aco, settings_dom}

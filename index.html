@@ -18,8 +18,8 @@
 
         <div class="result">
             <div>
-                <button class="btn">Start</button>
-                <button class="btn">Reset</button>
+                <button class="btn" id="Start">Start</button>
+                <button class="btn" id="Reset">Reset</button>
             </div>
 
             <div class="title">
@@ -27,8 +27,13 @@
             </div>
 
             <div class="table">
-                <div class="costo">
-                    Costo: <p id="costo"> </p>
+                <div class="algoritm_data">
+                    <div style="display: flex; flex-direction: row;">
+                        <p style="font-weight: bold;">Iteraciones:</p><p id="iteraciones_actuales">0</p> <p>/</p><p id="iteraciones_totales">25</p> 
+                    </div>
+                    <div style="display: flex; flex-direction: row;">
+                        <p style="font-weight: bold;">Costo total:</p><p id="costo">Infinito </p><p id="unidad">K/H</p>
+                    </div>
                 </div>
                 <table>
                     <tr>

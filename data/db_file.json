@@ -27,7 +27,7 @@
         "latitud": -32.9515,
         "longitud": -60.6643,
         "aeropuerto": {
-          "nombre": "Aeropuerto Internacional Rosario \"Islas Malvinas\"",
+          "nombre": "Aeropuerto Internacional Rosario",
           "latitud": -32.9051,
           "longitud": -60.7859,
           "codigo_iata": "ROS"
@@ -78,7 +78,7 @@
         }
       },
       {
-        "nombre": "La Plata",
+        "nombre": "Neuquén",
         "latitud": -34.9202,
         "longitud": -57.9538,
         "aeropuerto": {

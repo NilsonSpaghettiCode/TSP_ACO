@@ -1,9 +1,17 @@
 import { settings_map } from "./utils/settings.js";
-class Map {
+import { ISuscriber } from "./Interfaces/IObserver.js";
+class Map extends ISuscriber{
+
   constructor(nodos) {
+    super();
     this.map = {};
     this.features = [];
     this.nodos = nodos;
+  }
+
+  update(data)
+  {
+    console.log("Actualizando mapa!", data)
   }
 
   initMap(
@@ -30,8 +38,8 @@ class Map {
 
       let latitud = cordenada.getLatitude();
       let longitud = cordenada.getLongitude();
-      let contentPopUp = "Ciudad:" + nodo_t.getNombreCiudad() + ", Aeropuerto: " + nodo_t.getNombreAeropuerto() +", Codigo A.I.T.A: " + nodo_t.getNombre();
-
+      let contentPopup  = "Ciudad:" + nodo_t.getNombreCiudad() 
+      let contentTooltip = "Aeropuerto: " + nodo_t.getNombreAeropuerto() +", Codigo A.I.T.A: " + nodo_t.getNombre();
       let feature = L.marker([latitud, longitud]);
 
       let circle = L.circle([latitud, longitud], {
@@ -40,7 +48,9 @@ class Map {
         fillOpacity: 0.5,
         radius: settings_map.radius_circle,
       });
-      feature.bindPopup(contentPopUp);
+
+      circle.bindPopup(contentPopup)
+      feature.bindTooltip( contentTooltip);
 
       this.addFeature(feature);
       this.addFeature(circle)
@@ -50,6 +60,8 @@ class Map {
   addFeature(feature) {
     this.features.push(feature);
   }
+
+  
 
   showMap() {
     for (let index = 0; index < this.features.length; index++) {

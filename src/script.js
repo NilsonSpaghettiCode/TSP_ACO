@@ -1,31 +1,16 @@
 /**
  * Function Main
  */
-//import {settings} from "./utils/settings.js";
-import { loadDataCities, mapCitiesGraph } from "./DataController.js";
-import { Graph } from "./Graph.js";
-import {  Map } from "./MapController.js";
-import { ACO } from "./Ant.js";
+
+import { App } from "./AppController.js";
 
 let data = {};
+
 async function main(params) {
-  console.log("Funcionando!");
-  data = await loadDataCities("./data/db_file.json");
 
-  let grafo = new Graph();
-  grafo = mapCitiesGraph(data.ciudades);
+  let app = new App()
+  await app.init()
 
-  let mapa = new  Map(grafo.getNodosObj())
-  mapa.startMap()
-  
-  //grafo.verGrafo()
-
-  /**
-     * let algoritm_aco = new ACO(grafo)
-    let best_way = algoritm_aco.aprox()
-    console.log(best_way)
-     * 
-     */
   //console.log(grafo.getAristas())
 }
 
