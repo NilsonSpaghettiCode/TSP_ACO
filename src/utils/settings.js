@@ -15,7 +15,7 @@ let settings_aco =
     initial_feromone: 0.1,
     evaporation: 0.01,
     learning: 1,
-    max_iterations:200,
+    max_iterations:500,
     amount_ants:153,
     unidad: "K/M"
 }
@@ -26,7 +26,8 @@ let settings_dom =
     id_iteracion_i: "iteraciones_actuales",
     btn_start: "Start",
     btn_reset: "Reset",
-    id_costo:"costo"
+    id_costo:"costo",
+    id_table_data: "table_data"
 }
 
 export {settings_map, settings_aco, settings_dom}

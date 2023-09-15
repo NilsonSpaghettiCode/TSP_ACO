@@ -11,7 +11,7 @@ class Map extends ISuscriber{
 
   update(data)
   {
-    console.log("Actualizando mapa!", data)
+    //console.log("Actualizando mapa!", data)
   }
 
   initMap(

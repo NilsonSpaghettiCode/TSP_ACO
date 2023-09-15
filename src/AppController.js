@@ -26,7 +26,8 @@ class App {
       "unidad",
       "Start",
       "Reset",
-      "costo"
+      "costo",
+      "table_data"
     ];
 
     this.dom = new DomController(ids);
@@ -38,8 +39,6 @@ class App {
   
   }
   async Start() {
-    console.log(this.grafo);
-
     this.algoritmo_aco = new ACO(this.grafo);
 
     this.algoritmo_aco.addSuscriber(this.dom);

@@ -32,7 +32,8 @@ class Arista
         this.nodo_fin = nodo_fin
         
         this.tiempo = randomHour(3600, 7200)
-        this.peso = (geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada()) / this.tiempo) // Da lugar a una velocidad V=D/T
+        this.distancia = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada())
+        this.peso =  (this.distancia) // Da lugar a una velocidad V=D/T
         
         this.visibilidad = 1/ this.peso
         this.feromona = feromona
@@ -45,7 +46,7 @@ class Arista
     }
 
     
-    getInverso ()         { return new Arista(this.nodo_fin, this.nodo_inicio, this.feromona)}
+    getInverso() { return new Arista(this.nodo_fin, this.nodo_inicio, this.feromona)}
     
     setPxy(value){ this.Pxy = value }
     getPxy()     { return this.Pxy  }
@@ -64,6 +65,7 @@ class Arista
 
     getTiempo() { return this.tiempo      }
     getPeso  () { return this.peso        }
+    getDistancia() { return this.distancia}
     
     getNombre() { return (this.nodo_inicio.getNombre()+"_"+this.nodo_fin.getNombre())}
     
