@@ -18,7 +18,8 @@ let settings_aco =
     max_iterations:200,
     amount_ants:200,
     unidad: "H",
-    velocidad_base: 860
+    velocidad_base: 860,
+    camino_hamiltoniano: true
 }
 
 let settings_dom = 

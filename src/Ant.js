@@ -4,9 +4,10 @@ import { IPublisher, DataIterationACO } from "./Interfaces/IObserver.js";
 class Ant {
   constructor(start) {
     this.path = [];
+    this.start = start;
     this.nodo = start;
     this.aristas = []
-    //this.addNode(this.nodo);
+    this.addNode(this.nodo);
     //this.energy_total = 10; Variable inventada, estaria chevere ver como usarla
     if (start == "NONE") {
       this.cost = Infinity;
@@ -61,6 +62,11 @@ class Ant {
 
   getCost() {
     return this.cost;
+  }
+
+  getStart()
+  {
+    return this.start;
   }
 }
 
@@ -148,9 +154,16 @@ class ACO extends IPublisher{
 
         let nextArista = this.getNextArista(ant);
         ant.move(nextArista);
-
       }
-
+      
+      //Permite terminar un camino hamiltoniano, de acuerdo a las configuraciones
+      if (settings_aco.camino_hamiltoniano) {
+        let last_node = ant.getPath()[(ant.getPath().length-1)]
+        let neighbors = this.graph.getNodosVecinos(last_node)
+        let last_move = neighbors.filter((neighbor)=> neighbor.nodo_fin.getNombre() == ant.getStart())
+        ant.move(last_move[0])
+      }
+      
     }
   }
 
@@ -186,7 +199,7 @@ class ACO extends IPublisher{
       arista.setPxy(pxy);
     }
 
-    let selection = Math.random();
+    let selection = Math.random(); //Seleccion aleatoria de la hormiga
 
     let value = 0;
 

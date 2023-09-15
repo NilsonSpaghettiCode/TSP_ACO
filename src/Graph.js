@@ -32,7 +32,7 @@ class Arista
         this.nodo_inicio = nodo_inicio
         this.nodo_fin = nodo_fin
         
-        this.tiempo = randomHour(3600, 7200)
+        this.tiempo = randomHour(0, 7200)
         this.distancia = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada())
         this.peso =  (this.distancia/settings_aco.velocidad_base) + this.tiempo // Da lugar a una velocidad un tiempo -> T = (D/V) + Tiempo retraso
         

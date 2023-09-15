@@ -8,6 +8,7 @@ class Map extends ISuscriber {
     this.nodos = nodos;
     this.polylines = undefined
     this.arrowDecorator = undefined
+    this.mark_start = undefined
   }
 
   update(data) {
@@ -15,12 +16,24 @@ class Map extends ISuscriber {
     let aristas = ant.getAristas();
     this.setPolyLines(aristas);
   }
-
   setPolyLines(aristas) {
+    console.log()
     if (this.polylines != undefined && this.arrowDecorator != undefined) {
       this.arrowDecorator.remove();
       this.polylines.remove();
+      this.mark_start.remove()
     }
+
+    let customIcon = L.icon({
+      iconUrl: '../assets/img/bandera.png',
+      iconSize: [32, 32], // Tamaño de la imagen en píxeles
+      iconAnchor: [16, 32], // Punto de anclaje del icono
+    });
+  
+    this.mark_start = L.marker(aristas[0].getInicio().toLatLen(), { icon: customIcon });
+    this.mark_start.addTo(this.map)
+
+
     let localizaciones_geograficas = [];
     for (const index in aristas) {
       let arista = aristas[index];
