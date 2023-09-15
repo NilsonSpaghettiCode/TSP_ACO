@@ -77,7 +77,7 @@ class DomController extends ISuscriber {
   }
 
   setCosto(costo) {
-    this.elements[settings_dom.id_costo].textContent = costo;
+    this.elements[settings_dom.id_costo].textContent = costo.toFixed(2);
   }
 
   setIterationMaxima() {
@@ -100,6 +100,18 @@ class DomController extends ISuscriber {
     this.setElements();
     this.setIterationMaxima();
     this.alternateStateBtnReset();
+    this.setVelocidadBase();
+    this.setUnidad()
+  }
+
+  setUnidad()
+  {
+    this.elements[settings_dom.id_unidad].textContent = settings_aco.unidad
+  }
+
+  setVelocidadBase()
+  {
+    this.elements[settings_dom.id_velocidad_base].textContent = settings_aco.velocidad_base
   }
 
   reset() {

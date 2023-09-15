@@ -6,7 +6,7 @@ class Ant {
     this.path = [];
     this.nodo = start;
     this.aristas = []
-    this.addNode(this.nodo);
+    //this.addNode(this.nodo);
     //this.energy_total = 10; Variable inventada, estaria chevere ver como usarla
     if (start == "NONE") {
       this.cost = Infinity;

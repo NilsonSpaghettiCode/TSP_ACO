@@ -12,6 +12,7 @@ class Nodo
         this.nombre_ciudad = nombre_ciudad
     }
     getCoordenada() { return this.coordenada        }
+    toLatLen     () { return [this.coordenada.getLatitude(), this.coordenada.getLongitude()]}
     getNombre    () { return this.nombre            }
     
     getNombreAeropuerto() { return this.nombre_aeropuerto }
@@ -33,7 +34,7 @@ class Arista
         
         this.tiempo = randomHour(3600, 7200)
         this.distancia = geomath.haversine(nodo_inicio.getCoordenada(),nodo_fin.getCoordenada())
-        this.peso =  (this.distancia) // Da lugar a una velocidad V=D/T
+        this.peso =  (this.distancia/settings_aco.velocidad_base) + this.tiempo // Da lugar a una velocidad un tiempo -> T = (D/V) + Tiempo retraso
         
         this.visibilidad = 1/ this.peso
         this.feromona = feromona

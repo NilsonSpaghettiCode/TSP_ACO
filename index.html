@@ -28,12 +28,24 @@
 
             <div class="table">
                 <div class="algoritm_data">
+
                     <div style="display: flex; flex-direction: row;">
-                        <p style="font-weight: bold;">Iteraciones:</p><p id="iteraciones_actuales">0</p> <p>/</p><p id="iteraciones_totales">25</p> 
+                        <p style="font-weight: bold;">Iteraciones:</p>
+                        <p id="iteraciones_actuales">0</p>
+                        <p>/</p>
+                        <p id="iteraciones_totales">25</p>
                     </div>
                     <div style="display: flex; flex-direction: row;">
-                        <p style="font-weight: bold;">Costo total:</p><p id="costo">Infinito </p><p id="unidad">K/H</p>
+                        <p style="font-weight: bold;">Costo total:</p>
+                        <p id="costo">Infinito </p>
+                        <p id="unidad">K/H</p>
                     </div>
+                    <div style="display: flex; flex-direction: row;">
+                        <p style="font-weight: bold;">Velocidad Base:</p>
+                        <p id="velocidad_base">Infinito</p>
+                        <p>K/H</p>
+                    </div>
+
                 </div>
                 <table id="table_data">
                     <tr>
@@ -44,7 +56,7 @@
                         <th>Aeropuerto Destino</th>
                         <th>Distancia (Kilometros)</th>
                         <th>Retraso (Horas)</th>
-                        <th>Costo (KM*H)</th>
+                        <th>Costo (H)</th>
                     </tr>
                     <tr>
                         <td>Dato 1</td>
@@ -75,9 +87,11 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./libs/PolylineDecorator/dist/leaflet.polylineDecorator.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"
     integrity="sha256-qXBd/EfAdjOA2FGrGAG+b3YBn2tn5A6bhz+LSgYD96k=" crossorigin="anonymous"></script>
+
 <!--Imports locales-->
 <script type="module" src="src/script.js"></script>
 <link rel="stylesheet" href="style.css">

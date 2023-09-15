@@ -27,7 +27,8 @@ class App {
       "Start",
       "Reset",
       "costo",
-      "table_data"
+      "table_data",
+      "velocidad_base"
     ];
 
     this.dom = new DomController(ids);

@@ -1,17 +1,50 @@
 import { settings_map } from "./utils/settings.js";
 import { ISuscriber } from "./Interfaces/IObserver.js";
-class Map extends ISuscriber{
-
+class Map extends ISuscriber {
   constructor(nodos) {
     super();
     this.map = {};
     this.features = [];
     this.nodos = nodos;
+    this.polylines = undefined
+    this.arrowDecorator = undefined
   }
 
-  update(data)
-  {
-    //console.log("Actualizando mapa!", data)
+  update(data) {
+    let ant = data.getPath();
+    let aristas = ant.getAristas();
+    this.setPolyLines(aristas);
+  }
+
+  setPolyLines(aristas) {
+    if (this.polylines != undefined && this.arrowDecorator != undefined) {
+      this.arrowDecorator.remove();
+      this.polylines.remove();
+    }
+    let localizaciones_geograficas = [];
+    for (const index in aristas) {
+      let arista = aristas[index];
+      localizaciones_geograficas.push(arista.getInicio().toLatLen());
+      localizaciones_geograficas.push(arista.getFin().toLatLen());
+    }
+
+    this.polylines = L.polyline(localizaciones_geograficas, { color: "red" });
+    this.polylines.addTo(this.map);
+
+    this.arrowDecorator = L.polylineDecorator(this.polylines, {
+      patterns: [
+        {
+          offset: 25,
+          repeat: 50,
+          symbol: L.Symbol.arrowHead({
+            pixelSize: 10,
+            polygon: false,
+            pathOptions: { stroke: true, color: "red" },
+          }),
+        },
+      ],
+    });
+    this.arrowDecorator.addTo(this.map);
   }
 
   initMap(
@@ -38,8 +71,12 @@ class Map extends ISuscriber{
 
       let latitud = cordenada.getLatitude();
       let longitud = cordenada.getLongitude();
-      let contentPopup  = "Ciudad:" + nodo_t.getNombreCiudad() 
-      let contentTooltip = "Aeropuerto: " + nodo_t.getNombreAeropuerto() +", Codigo A.I.T.A: " + nodo_t.getNombre();
+      let contentPopup = "Ciudad:" + nodo_t.getNombreCiudad();
+      let contentTooltip =
+        "Aeropuerto: " +
+        nodo_t.getNombreAeropuerto() +
+        ", Codigo A.I.T.A: " +
+        nodo_t.getNombre();
       let feature = L.marker([latitud, longitud]);
 
       let circle = L.circle([latitud, longitud], {
@@ -49,19 +86,17 @@ class Map extends ISuscriber{
         radius: settings_map.radius_circle,
       });
 
-      circle.bindPopup(contentPopup)
-      feature.bindTooltip( contentTooltip);
+      circle.bindPopup(contentPopup);
+      feature.bindTooltip(contentTooltip);
 
       this.addFeature(feature);
-      this.addFeature(circle)
+      this.addFeature(circle);
     }
   }
 
   addFeature(feature) {
     this.features.push(feature);
   }
-
-  
 
   showMap() {
     for (let index = 0; index < this.features.length; index++) {
