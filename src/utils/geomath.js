@@ -1,5 +1,5 @@
 /**
- * Const eart radius
+ * Const eart radius (KM)
  */
 const R = 6371;
 
